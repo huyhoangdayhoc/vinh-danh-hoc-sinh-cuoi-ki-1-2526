@@ -1,0 +1,2008 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinh Danh Học Sinh — Mẫu Mobile</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --muted:#9ca3af;
+      --glass: rgba(255,255,255,0.04);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; background: linear-gradient(180deg,#071226 0%, #081428 100%);color:#e6eef6}
+    .app{
+      /*background-color: #C57CAC;*/
+      padding:0px 0px 0px;
+      max-width:980px;
+      margin:0 auto;
+    }
+    header{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px;
+    }
+    header h1{font-size:18px;margin:0}
+    header p{margin:0;font-size:13px;color:var(--muted)}
+
+    /* Cards horizontal scroll for mobile */
+    .cards-wrap{
+      display:flex;
+      gap:14px;
+      overflow-x:auto;
+      padding:8px 6px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    /* Hide scrollbar but keep accessible */
+    .cards-wrap::-webkit-scrollbar{height:8px}
+    .cards-wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:999px}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+      min-width:260px;
+      max-width:320px;
+      flex:0 0 auto;
+      border-radius:14px;
+      padding:12px;
+      box-sizing:border-box;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.04);
+      scroll-snap-align:center;
+    }
+    .card .photo{
+      height:140px;border-radius:10px;overflow:hidden;margin-bottom:10px;background:var(--glass);display:flex;align-items:center;justify-content:center
+    }
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .meta{display:flex;align-items:center;gap:10px}
+    .meta .avatar{width:56px;height:56px;border-radius:10px;overflow:hidden;flex-shrink:0}
+    .meta .info{flex:1}
+    .meta .info h3{margin:0;font-size:15px}
+    .meta .info p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+
+    .badge{margin-top:10px;display:inline-block;padding:6px 8px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#7c3aed);font-weight:600;font-size:12px}
+
+    .stats{display:flex;gap:8px;margin-top:12px;font-size:13px}
+    .stats div{flex:1;background:rgba(255,255,255,0.03);padding:8px;border-radius:8px;text-align:center}
+
+    .cta{display:flex;gap:8px;margin-top:12px}
+    .btn{flex:1;padding:10px;border-radius:10px;border:0;background:var(--accent);color:#022;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* Larger layout: show grid of horizontal rows on wider screens */
+    @media(min-width:720px){
+      .cards-wrap{flex-wrap:wrap;overflow:visible}
+      .card{min-width:calc(33% - 18px);max-width:calc(33% - 18px)}
+    }
+
+    /* Small polish */
+    .note{font-size:12px;color:var(--muted);margin-top:10px}
+  </style>
+</head>
+
+<audio id="bgm" autoplay loop hidden>
+  <source src="https://www.nhaccuatui.com/song/RCWcGY0sUp8Z" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById("bgm");
+  audio.addEventListener('loadedmetadata', () => {
+    audio.currentTime = 45; // đổi số 45 thành giây thầy muốn
+    audio.play();
+  });
+</script>
+
+
+<body>
+  <div class="app">
+
+ <header style="display:flex;align-items:center;gap:16px;padding:12px 18px;background:#fff;color:#00B2BF;">
+  <div style="width:72px;height:72px;overflow:hidden;border:3px solid #00B2BF;border-radius:8px;">
+    <img src="https://instagram.fdad1-1.fna.fbcdn.net/v/t51.82787-15/611138825_17842080294674025_1899997075912967700_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ig_cache_key=MzgwMzgyNDIxNDE3NzQyNjE3OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjU5NXg3OTMuc2RyLkMzIn0%3D&_nc_ohc=wfKFUekrGlIQ7kNvwFolnRN&_nc_oc=AdmQPAleZzAqsI5d8eBu_Z5wGbmwBD53x1gVvfgBEveARPw9qi3TodWHWwncvS-Rv86EC4qH3Ea06yhZXyqR2ROR&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fdad1-1.fna&_nc_gid=ErpfgEeGREJEjUQupqzm2g&oh=00_AfoeB96-j6QpjpjJGfnFIL3qKIshqhJO2n4LKjKMVBWsKw&oe=69623DB6" alt="Avatar" style="width:100%;height:100%;object-fit:cover;">
+  </div>
+
+  <div>
+    <h1 style="margin:0;font-size:20px;font-weight:700;color:#00B2BF;">LỚP THẦY HOÀNG CẨM NÊ - TOÁN & KHTN</h1>
+    <p style="margin:0;font-size:13px;color:#00B2BF;">ZALO: 0787 195 591</p>
+  </div>
+</header>
+<h5 style="
+  font-family: Lucida Sans Unicode;
+  color: #ffffff;
+  text-align: center;
+">
+  Danh sách các bạn học sinh thi điểm giỏi && xuất sắc <br> Năm học : 2025-2026 <br>Giữa Kì I
+</h5>
+    <section class="cards-wrap" aria-label="Danh sách vinh danh">
+      <!-- Card 1 -->
+      <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+        <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-meo-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Huy</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 1</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">100%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-facebook-vo-tri-cute-3.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Văn Ngọc</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 2</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+     
+           <!-- Card 3 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-meo-2.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bảo An</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 3</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.4</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+     
+           <!-- Card 4 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-meo-4.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khả Nhi</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 4</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+     
+           <!-- Card 5 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-meo-5.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bảo An</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 5</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+     
+           <!-- Card 6 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-meo-6.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Huy</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 6</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">100%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+     
+           <!-- Card 7 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-meo-vo-tri-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Văn Bình</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 7</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                 <!-- Card 8 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-meo-vo-tri-2.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Hiền Trân</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 8</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                 <!-- Card 9 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-meo-vo-tri-3.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Mình Quân</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 9</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                 <!-- Card 10 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-meo-vo-tri-4.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Cẩm Ngân</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 10</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                  <!-- Card 11 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-meo-vo-tri-5.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Xuân Nhi</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 6 — Học sinh ngoan - Card 11</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                  <!-- Card 12 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-meo-vo-tri-6.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Thành Long</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 12</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                  <!-- Card 13 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/hinh-anh-cute-avatar-vo-tri-3.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Nguyên</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 13</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">10</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                  <!-- Card 14 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/hinh-anh-cute-avatar-vo-tri-4.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Anh Hào</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 14</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                        <!-- Card 15 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/hinh-anh-cute-avatar-vo-tri-6.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bảo Trâm</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 15</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                        <!-- Card 16 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/hinh-anh-cute-avatar-vo-tri-7.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Ngọc Hà</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 16</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                        <!-- Card 17 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-facebook-vo-tri-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Phú Hưng</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 17</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                        <!-- Card 18 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-facebook-vo-tri-cute-2.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Ly</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 18</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                        <!-- Card 19 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Thành Long</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 19</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                        <!-- Card 20 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Nguyên</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 20</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+     
+                          <!-- Card 21 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Thảo Nguyên</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 21</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 22 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Quang Đạt</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 22</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 23 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Xuân Tiên</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 23</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 24 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bảo Ngọc</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 20</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 24 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Ngọc Hân</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 20</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 25 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Huỳnh Thanh Trúc</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 25</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 26 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Ngọc</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 26</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 27 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Minh Khánh</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 27</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 28 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bảo An</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 28</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 29 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Đăng Khoa</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 29</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 30 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Vy Oanh</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 30</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 31 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Khánh Huyền</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 31</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">10</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 32 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Mạnh Hoàng</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 32</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 33 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Quỳnh Diễm</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 33</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 34 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Minh Tâm</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 34</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 35 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Cẩm Dương</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 35</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 36 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Kim Ngân</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 36</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 37 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bùi Thanh Trúc</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 37</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 38 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Ngọc Quyên</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 38</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                          <!-- Card 39 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Trần Ngọc</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 7 — Học sinh ngoan - Card 39</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                             <!-- Card 40 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Minh Quân</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 40</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+      
+                                   <!-- Card 41 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Minh Quân</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 41</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 42 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Bảo Long</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 42</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 43 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Phạm Nhật</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 43</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 44 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Hoàng Uyên</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 44</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 45 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Thanh Phong</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 45</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 46 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Hùng Vương</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 46</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 47 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Quốc Tiến</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 8 — Học sinh ngoan - Card 47</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8,25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 48 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Trí Sĩ</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 48</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 49 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Hữu Huy</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 49</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                   <!-- Card 50 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Phương Linh</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 50</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                        <!-- Card 51 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Anh Quân</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 51</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 52 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Văn Nhiên</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 52</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 53 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Cẩm Hà</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 53</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 54 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Tuấn Anh</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 54</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 55 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Hữu Huy</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 55</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 56 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Mai Phương</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 56</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 57 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Cẩm Hà</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 57</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 58 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Thanh Hà</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 58</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 59 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Minh Khang</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 59</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">8.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 60 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Đình Tiến</h3>
+            <p>Môn : KHTN</p>
+            <p>Lớp 9 — Học sinh ngoan - Card 60</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 61 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Anh Thư</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 11 — Học sinh ngoan - Card 61</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.25</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 62 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Phước Tiến</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 11 — Học sinh ngoan - Card 62</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.75</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+                                         <!-- Card 63 -->
+       <article class="card" role="article">
+        <div class="photo" aria-hidden="true">
+          <img src="https://jbagy.me/wp-content/uploads/2025/03/anh-avatar-vo-tri-hai-cute-1.jpg"alt="Hình ảnh học sinh 1">
+        </div>
+        <div class="meta">
+          <div class="info">
+            <h3>Văn Thiện</h3>
+            <p>Môn : Toán</p>
+            <p>Lớp 12 — Học sinh ngoan - Card 63</p>
+          </div>
+        </div>
+  
+        <div class="stats">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Điểm</div>
+            <div style="font-weight:700">9.5</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Chuyên cần</div>
+            <div style="font-weight:700">98%</div>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn ghost">Nhận xét</button>
+           <button class="btn">Vuýp</button>
+        </div>
+      </article>
+      
+        
+        
+        
+        
+        
+        
+        <!--//hết-->
+      
+      
+      
+    </section>
+    
+    <div style="display:flex;justify-content:center;gap:14px;margin:20px 0;">
+      <a href="https://www.google.com/url?q=https://m.youtube.com/@huyhoangdayhoc" target="_blank" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.12);border-radius:8px;color:#fff;"><svg viewBox="0 0 576 512" width="20" height="20" fill="currentColor"><path d="M549.7 124.1c-6.3-23.7-24.9-42.3-48.6-48.6C458.8 64 288 64 288 64s-170.8 0-213.1 11.5c-23.7 6.3-42.3 24.9-48.6 48.6C15 166.4 15 256.1 15 256.1s0 89.7 11.3 132c6.3 23.7 24.9 42.3 48.6 48.6C117.2 448 288 448 288 448s170.8 0 213.1-11.5c23.7-6.3 42.3-24.9 48.6-48.6 11.3-42.3 11.3-132 11.3-132s.1-89.7-11.3-132zM232 338.5v-165l142 82.5-142 82.5z"/></svg></a>
+      <a href="https://www.tiktok.com/@hhhdn9999" target="_blank" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.12);border-radius:8px;color:#fff;"><svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M448 209.2c-17.2 7.6-35.7 12.7-55.1 15.1-1.4 0-2.8.1-4.2.1-53 0-96-43-96-96V16h-80v288c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48c5.5 0 10.8.9 15.7 2.6v-82.2c-5.2-.7-10.5-1.1-15.7-1.1-71.7 0-130 58.3-130 130s58.3 130 130 130 130-58.3 130-130V214.1c22.5 16.4 50.3 26.1 80 26.1 1.4 0 2.9 0 4.3-.1v-31z"/></svg></a>
+      </div>
+    </div>
+    <div><h5 style="
+        font-family: Lucida Sans Unicode;
+        color: #ffffff;
+        text-align: center;
+      ">
+        “Danh sách này không chỉ là điểm số, mà còn là những kỷ niệm đẹp trên con đường học tập của tuổi học trò.” <br>
+         Nơi Thầy Hoàng cất ảnh học sinh : => <a href="https://huyhoang.pixieset.com/huyhoangdayhoc/" style="color:white; background-color:red;" >Ở ĐÂY NÈ</a> <br>
+      <a href="https://www.instagram.com/huyhoangdayhoc/" style="color:white; background-color:red;" >Ở ĐÂY NỮA</a>
+      </h5>
+    </div>
+    
+    <footer style="position:fixed;bottom:0;left:0;width:100%;text-align:center;z-index:999;">
+      <h6 style="background:#fff;color:#00B2BF;padding:10px;margin:0;">
+        LỚP THẦY HOÀNG CẨM NÊ - TOÁN & KHTN - ZALO: 0787 195 591
+      </h6>
+    </footer>
+</body>
+</html>
